@@ -58,6 +58,13 @@ while(TEST_INDEX LESS TEST_COUNT)
     set(_current_branch ${TEST_${TEST_INDEX}_BRANCH})
 
     foreach(_prefix TEST_ PYTEST_)
+        unset(_current_targets)
+        unset(_current_expected_results_list)
+        unset(_current_abs_tolerance)
+        unset(_current_rel_tolerance)
+        unset(_current_args_list)
+        unset(_current_mp)
+
         set(_current_targets ${${_prefix}${TEST_INDEX}_TARGETS})
         set(_current_expected_results_list ${${_prefix}${TEST_INDEX}_EXPECTED_RESULTS})
         set(_current_abs_tolerance ${${_prefix}${TEST_INDEX}_ABS_TOLERANCE})
