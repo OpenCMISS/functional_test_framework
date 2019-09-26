@@ -54,7 +54,7 @@ add_test(NAME ${TEST_NAME}
 
 ")
 if (DEFINED TEST_ENV) then
-   set_tests_properties(${TEST_NAME} PROPERTIES ENVIRONMENT "${TEST_ENV}")
+   set_tests_properties(${TEST_NAME} PROPERTIES ENVIRONMENT ${TEST_ENV})
 endif()
 
     file(APPEND ${OUTPUT_FILENAME} ${_TMP_OUTPUT})
