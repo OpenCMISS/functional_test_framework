@@ -19,7 +19,7 @@ macro(write_mp_python_test OUTPUT_FILENAME TEST_NAME TEST_TARGET TEST_NP TEST_RO
     _write_test_to_file(${OUTPUT_FILENAME} py${TEST_NAME} ${TEST_CMD} ${TEST_ROOT} ${TEST_EXPECTED_RESULTS} ${TEST_ABS_TOLERANCE} ${TEST_REL_TOLERANCE} ${ARGN})
 endmacro()
 
-function(_write_test_to_file OUTPUT_FILENAME TEST_NAME TEST_CMD TEST_ROOT TEST_EXPECTED_RESULTS TEST_ABS_TOLERANCE TEST_REL_TOLERANCE)
+function(_write_test_to_file OUTPUT_FILENAME TEST_NAME TEST_CMD TEST_ROOT TEST_EXPECTED_RESULTS TEST_ABS_TOLERANCE TEST_REL_TOLERANCE TEST_ENV)
     foreach(_arg ${ARGN})
         string(REPLACE "|" ";" _args_list ${_arg})
         set(_extended_args)
@@ -53,6 +53,9 @@ add_test(NAME ${TEST_NAME}
    -P ${TESTS_BASE_DIR}/run_test.cmake)
 
 ")
+if (DEFINED TEST_ENV) then
+   set_tests_properties(${TEST_NAME} PROPERTIES ENVIRONMENT "${TEST_ENV}")
+endif()
 
     file(APPEND ${OUTPUT_FILENAME} ${_TMP_OUTPUT})
 endfunction()
