@@ -53,7 +53,7 @@ add_test(NAME ${TEST_NAME}
    -P ${TESTS_BASE_DIR}/run_test.cmake)
    
    if (DEFINED TEST_ENV)
-      set_tests_properties(${TEST_NAME} PROPERTIES ENVIRONMENT ${TEST_ENV})
+      set_tests_properties(${TEST_NAME} PROPERTIES ENVIRONMENT \"${TEST_ENV}\")
    endif()
 
 
