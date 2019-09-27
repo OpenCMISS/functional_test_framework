@@ -62,6 +62,11 @@ The *TEST_MULTI_PROCESS* variable, if defined, specifies whether the example is 
 
 The name of the test is taken from the name of the test description file less the suffix '.cmake'.
 
+* TEST_TARGETS_ENV
+
+The *TEST_TARGETS_ENV* variable, if defined, specifies which environment variables should be set during test runs. The variables must be defined in the form of "NAME=VALUE|NAME=VALUE...". Note the use of | symbol to delimit multiple variables.
+
+
 How to use
 ==========
 
