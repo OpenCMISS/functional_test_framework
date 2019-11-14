@@ -69,6 +69,8 @@ ExternalProject_Add(ndiff
     INSTALL_COMMAND ${CMAKE_COMMAND} --build . --target install ${MULTICONFIG_BUILD_CONFIG}
 )
 
+MESSAGE(STATUS "*** DB TAG: ${TEST_DB_REPO_BRANCH}")
+
 ExternalProject_Add(test_db
     SOURCE_DIR test_db/
     GIT_REPOSITORY ${TEST_DB_REPO_URL}
