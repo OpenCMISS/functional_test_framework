@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.4 FATAL_ERROR)
-project(OpenCMISS-FunctionalTests VERSION 1.0 LANGUAGES C CXX)
+project(OpenCMISS-FunctionalTests VERSION 1.0 LANGUAGES C CXX Fortran)
 
 # Default values for test database.
 set(TEST_DB_GIT_BASE https://github.com)
