@@ -6,7 +6,7 @@
 #  - OpenCMISSLibs_DIR: A directory where opencmisslibs.config exists.
 
 cmake_minimum_required(VERSION 3.4 FATAL_ERROR)
-project(testacquire VERSION 1.0 LANGUAGES C CXX)
+project(testacquire VERSION 1.0 LANGUAGES C CXX Fortran)
 
 # Basic test for multi-configuration capable environments
 if (MSVC OR XCODE)
