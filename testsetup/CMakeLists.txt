@@ -1,6 +1,7 @@
 
 # This project requires:
 #  - NDIFF_EXECUTABLE: ndiff executable.
+#  - OCMERGE_EXECUTABLE: ocmerge executable.
 #  - DB_DIR: Database location that can be read with read_test_db.
 #  - TESTS_BASE_DIR: Base directory where the examples to be tested are downloaded to.
 #  - OpenCMISSLibs_DIR: A directory where opencmisslibs.config exists.

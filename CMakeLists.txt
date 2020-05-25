@@ -69,6 +69,34 @@ ExternalProject_Add(ndiff
     INSTALL_COMMAND ${CMAKE_COMMAND} --build . --target install ${MULTICONFIG_BUILD_CONFIG}
 )
 
+set(OCMERGE_DEPEND "")
+
+if(CMAKE_HOST_SYSTEM_NAME STREQUAL Darwin)
+
+    # Default values for ocmerge.
+    set(OCMERGE_GIT_BASE https://github.com)
+    set(OCMERGE_ORG OpenCMISS-Utilities)
+    set(OCMERGE_REPO_NAME ocmerge)
+    set(OCMERGE_REPO_BRANCH 1.0.0)
+    set(OCMERGE_REPO_URL ${OCMERGE_GIT_BASE}/${OCMERGE_ORG}/${OCMERGE_REPO_NAME})
+    set(OCMERGE_CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=.)
+
+    ExternalProject_Add(ocmerge
+        PREFIX ocmerge
+        STAMP_DIR ocmerge/stamp
+        TMP_DIR ocmerge/tmp
+        SOURCE_DIR ocmerge/src
+        BINARY_DIR ocmerge/build
+        GIT_REPOSITORY ${OCMERGE_REPO_URL}
+        GIT_TAG ${OCMERGE_REPO_BRANCH}
+        CMAKE_COMMAND ${CMAKE_COMMAND}
+        CMAKE_ARGS ${SINGLE_BUILD_CONFIG} ${OCMERGE_CMAKE_ARGS}
+        BUILD_COMMAND ""
+        INSTALL_COMMAND ${CMAKE_COMMAND} --build . --target install ${MULTICONFIG_BUILD_CONFIG}
+    )
+    set(OCMERGE_DEPEND ocmerge)
+endif ()
+
 MESSAGE(STATUS "*** DB TAG: ${TEST_DB_REPO_BRANCH}")
 
 ExternalProject_Add(test_db
@@ -110,10 +138,11 @@ add_custom_target(setup_tests
         -DCMAKE_MODULE_PATH=${CMAKE_CURRENT_SOURCE_DIR}/Modules
         -DTEST_DB=${TEST_DB}
         -DNDIFF_EXECUTABLE=${CMAKE_CURRENT_BINARY_DIR}/ndiff/build/bin/ndiff
+        -DOCMERGE_EXECUTABLE=${CMAKE_CURRENT_BINARY_DIR}/ocmerge/build/bin/ocmerge
         -DTESTS_BASE_DIR=${CMAKE_CURRENT_BINARY_DIR}/tests
         ${CMAKE_CURRENT_SOURCE_DIR}/testsetup
     COMMAND ${CMAKE_COMMAND} --build . ${MULTICONFIG_BUILD_CONFIG}
-    DEPENDS ndiff acquire_tests
+    DEPENDS ndiff ${OCMERGE_DEPEND} acquire_tests
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/testsetup-build)
 
 add_custom_target(build_tests
